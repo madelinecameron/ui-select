@@ -104,7 +104,8 @@ var uis = angular.module('ui.select', [])
   generateId: function() {
     return latestId++;
   },
-  appendToBody: false
+  appendToBody: false,
+  preventPageScroll: true
 })
 
 // See Rename minErr and make it accessible from outside https://github.com/angular/angular.js/issues/6913

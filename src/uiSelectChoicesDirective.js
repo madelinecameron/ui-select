@@ -65,6 +65,19 @@ uis.directive('uiSelectChoices',
           choices.remove();
         });
 
+        if ($select.preventPageScroll) {// Prevent the whole page for scrolling when the choices ul reaches it's scroll limits.
+          element.on('mousewheel', function(event) {
+            var heightDif = this.offsetHeight - this.clientHeight,
+                maxScrollTop = this.scrollHeight - this.offsetHeight + heightDif;
+
+            if ((this.scrollTop === maxScrollTop && event.deltaY > 0) ||
+                (this.scrollTop === 0 && event.deltaY < 0)) {
+              event.preventDefault();
+            }
+          });
+        }
+
+
         scope.$watch('$select.search', function(newValue) {
           if(newValue && !$select.open && $select.multiple) $select.activate(false, true);
           $select.activeIndex = $select.tagging.isActivated ? -1 : 0;

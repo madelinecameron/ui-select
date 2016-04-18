@@ -52,6 +52,15 @@ uis.directive('uiSelect',
           }
         }();
 
+        $select.preventPageScroll = function() {
+          if (angular.isDefined(attrs.preventPageScroll)) {
+            return $parse(attrs.preventPageScroll)();
+          } else {
+            return uiSelectConfig.preventPageScroll;
+          }
+        }();
+
+
         scope.$watch('skipFocusser', function() {
             var skipFocusser = scope.$eval(attrs.skipFocusser);
             $select.skipFocusser = skipFocusser !== undefined ? skipFocusser : uiSelectConfig.skipFocusser;
